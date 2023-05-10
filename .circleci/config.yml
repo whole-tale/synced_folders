@@ -7,8 +7,16 @@ jobs:
     docker:
       - image: wholetale/girder:latest
       - image: mongo:3.4
+    environment:
+      PLUGIN: synced_folders
     steps:
       - checkout
+      - run:
+          name: Installing Plugin Dependencies
+          command: |
+            rm -rf /girder/plugins/${PLUGIN}
+            ln -s /root/project /girder/plugins/${PLUGIN}
+            # set -o pipefail; python3 -m pip install --upgrade --force-reinstall -r requirements.txt -r requirements-dev.txt | cat
       - run:
           name: Install Test Dependencies
           environment:
@@ -29,7 +37,7 @@ jobs:
             - GIRDER_WT_EVENT_EXP_SECONDS: 60
           command: |
             mkdir /girder/build
-            ctest -VV -S /girder/plugins/synced_folders/cmake/circle_continuous.cmake
+            ctest -VV -S /girder/plugins/${PLUGIN}/cmake/circle_continuous.cmake
       - run:
           name: Collect coverage reports
           command: coverage combine /girder/build/test/coverage/python_temp/
