@@ -1,0 +1,5 @@
+{
+    "name": "Synced Folders",
+    "description": "Plugin to keep imported folders synced with remote state",
+    "version": "0.1.0"
+}
