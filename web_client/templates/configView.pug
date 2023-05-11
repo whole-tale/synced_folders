@@ -1,0 +1,14 @@
+.g-config-breadcrumb-container
+
+#g-synced-folders-options.panel-group
+  .panel.panel-default
+    .panel-heading
+      .panel-title Synced Folders Configuration
+      .panel-body
+        form#g-synced-folders-config-form.g-synced-folders-config-form(role="form")
+          .form-group
+            label.control-label(for="g-synced-folders-checksum-size-limit") Calculate checksum only for first N Mb
+            input#g-synced-folders-checksum-size-limit.input-sm.form-control(
+                type="number", placeholder="4")
+          p#g-synced-folders-error-message.g-validation-failed-message()
+          input.btn.btn-sm.btn-primary(type="submit", value="Save")
