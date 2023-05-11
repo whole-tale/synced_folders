@@ -39,7 +39,7 @@ var ConfigView = View.extend({
     },
 
     SETTING_KEYS: [
-        'synced_folders.checksum_size_limit',
+        'synced_folders.checksum_size_limit'
     ],
 
     settingControlId: function (key) {

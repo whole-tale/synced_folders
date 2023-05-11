@@ -147,6 +147,7 @@ class SyncFolderImporter:
         Folder().updateSize(parent)
         parent["isSyncFolder"] = True
         parent["syncPath"] = importPath
+        parent["assetstoreId"] = self.assetstore["_id"]
         Folder().setMetadata(parent, {"isSyncFolder": True})
         logger.debug("Deleting empty folders")
         self.delete_empty_folders(parent)
@@ -227,8 +228,10 @@ class SyncFolderImporter:
 
 
 def load(info):
-    File().exposeFields(level=AccessType.ADMIN, fields=("partialSha512", ))
-    Folder().exposeFields(level=AccessType.ADMIN, fields=("syncPath", "isSyncFolder"))
+    File().exposeFields(level=AccessType.ADMIN, fields=("partialSha512",))
+    Folder().exposeFields(
+        level=AccessType.ADMIN, fields=("syncPath", "isSyncFolder", "assetstoreId")
+    )
 
     events.bind(
         "rest.post.assetstore/:id/import.before", "sync_folders", import_sync_folder
