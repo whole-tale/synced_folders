@@ -9,10 +9,9 @@ import SyncedFoldersHierarchyWidget from '../templates/HierarchyWidget.pug';
 
 wrap(HierarchyWidget, 'render', function (render) {
     var widget = this;
+    const folderHeader = widget.$('.g-folder-header-buttons');
 
-    console.log('HierarchyWidget', widget.parentModel.resourceName, widget.parentModel);
-
-    if (getCurrentUser() && widget.parentModel.resourceName === 'folder' && widget.parentModel.attributes.isSyncFolder) {
+    if (getCurrentUser() && widget.parentModel.resourceName === 'folder' && widget.parentModel.attributes.isSyncFolder && folderHeader.length > 0) {
         render.call(widget);
         $(SyncedFoldersHierarchyWidget()).prependTo(widget.$('.g-folder-header-buttons'));
         document.getElementsByClassName('g-sync-button')[0].style.display = 'inline';
